@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "smallerstackcount",
+  "version": "${version}",
+  "name": "Smaller Stack Count",
+  "description": "simple mod to reduce the size of stack count",
+  "authors": [],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/betterstackcount/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "CCPCT.betterstackcount.client.Client"
+    ],
+    "modmenu": [
+      "CCPCT.betterstackcount.config.ModMenu"
+    ]
+  },
+  "mixins": [
+    "betterstackcount.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21",
+    "modmenu": "*",
+    "cloth-config": "*"
+  }
+}

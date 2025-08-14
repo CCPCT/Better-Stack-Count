@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "CCPCT.betterstackcount.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "DrawStack",
+    "TextRendererAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
