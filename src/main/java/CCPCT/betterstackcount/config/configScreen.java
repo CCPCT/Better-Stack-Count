@@ -22,7 +22,7 @@ public class configScreen extends Screen {
                 .setSavingRunnable(ModConfig::save);
 
         ConfigCategory generalTab = builder.getOrCreateCategory(Text.literal("General"));
-        ConfigCategory screenTab = builder.getOrCreateCategory(Text.literal("Overlay"));
+        ConfigCategory screenTab = builder.getOrCreateCategory(Text.literal("Stack Count Text"));
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
@@ -39,7 +39,7 @@ public class configScreen extends Screen {
                 .setSaveConsumer(newValue -> ModConfig.get().debug = newValue)
                 .build());
 
-        screenTab.addEntry(entryBuilder.startIntField(Text.literal("Font Size"),ModConfig.get().fontHeight)
+        screenTab.addEntry(entryBuilder.startIntField(Text.literal("Font Size %"),ModConfig.get().fontHeight)
                 .setDefaultValue(100)
                 .setTooltip(Text.literal("% of original size. 100=original, 0 to disable showing count"))
                 .setSaveConsumer(newValue -> ModConfig.get().fontHeight = newValue)
@@ -62,6 +62,17 @@ public class configScreen extends Screen {
                 .setDefaultValue("Bottom Right")
                 .setTooltip(Text.literal("Select one option\n(Bottom Right is default)"))
                 .setSaveConsumer(newValue -> ModConfig.get().position = newValue)
+                .build());
+
+        screenTab.addEntry(entryBuilder.startBooleanToggle(Text.literal("Background for stack count"),ModConfig.get().background)
+                .setDefaultValue(false)
+                .setSaveConsumer(newValue -> ModConfig.get().background = newValue)
+                .build());
+
+        screenTab.addEntry(entryBuilder.startAlphaColorField(Text.literal("Background Colour"),ModConfig.get().bgColour)
+                .setDefaultValue(0x50000000)
+                .setTooltip(Text.literal("both ARGB and RGB acceptable"))
+                .setSaveConsumer(newValue -> ModConfig.get().bgColour = newValue)
                 .build());
 
         return builder.build();

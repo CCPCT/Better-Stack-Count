@@ -8,6 +8,7 @@ settings:
 - font
 - colour/ opacity
 - position
+- background
 
 I always find the item stack count a bit too big for smaller screen which hides the item so :3
 

@@ -11,10 +11,14 @@ import java.nio.file.Path;
 public class ModConfig {
     public boolean enableMod = true;
     public boolean debug = false;
+
     public int fontHeight = 100;
     public int colour = 0xFFFFFFFF;
     public String font = "";
     public String position = "Bottom Right";
+
+    public boolean background=false;
+    public int bgColour = 0x50000000;
 
 
 

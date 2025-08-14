@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "smallerstackcount",
+  "id": "betterstackcount",
   "version": "${version}",
-  "name": "Smaller Stack Count",
-  "description": "simple mod to reduce the size of stack count",
+  "name": "Better Stack Count",
+  "description": "simple mod configure stack count text",
   "authors": [],
   "contact": {},
   "license": "GPL-3.0",

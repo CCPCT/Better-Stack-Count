@@ -4,8 +4,7 @@
   "package": "CCPCT.betterstackcount.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "DrawStack",
-    "TextRendererAccessor"
+    "DrawStack"
   ],
   "injectors": {
     "defaultRequire": 1
