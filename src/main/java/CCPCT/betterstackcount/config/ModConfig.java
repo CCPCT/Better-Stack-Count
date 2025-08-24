@@ -16,6 +16,8 @@ public class ModConfig {
     public int colour = 0xFFFFFFFF;
     public String font = "";
     public String position = "Bottom Right";
+    public boolean showToolDurability = false;
+    public boolean toolDurablityPercentage = false;
 
     public boolean background=false;
     public int bgColour = 0x50000000;

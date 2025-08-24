@@ -8,9 +8,9 @@ import net.minecraft.text.Text;
 
 import java.util.List;
 
-public class configScreen extends Screen {
+public class ConfigScreen extends Screen {
 
-    protected configScreen() {
+    protected ConfigScreen() {
         super(Text.literal("Totem Utils Config"));
     }
 
@@ -62,6 +62,18 @@ public class configScreen extends Screen {
                 .setDefaultValue("Bottom Right")
                 .setTooltip(Text.literal("Select one option\n(Bottom Right is default)"))
                 .setSaveConsumer(newValue -> ModConfig.get().position = newValue)
+                .build());
+
+        screenTab.addEntry(entryBuilder.startBooleanToggle(Text.literal("Show Tool Durability"),ModConfig.get().showToolDurability)
+                .setDefaultValue(false)
+                .setTooltip(Text.literal("when tools/ armour has stack count 1 and durability\ntoggle this to show its durability"))
+                .setSaveConsumer(newValue -> ModConfig.get().showToolDurability = newValue)
+                .build());
+
+        screenTab.addEntry(entryBuilder.startBooleanToggle(Text.literal("Tool Durability as percentage"),ModConfig.get().toolDurablityPercentage)
+                .setDefaultValue(false)
+                .setTooltip(Text.literal("if enabled, stackcount will show percentage of item instead of the actual durability"))
+                .setSaveConsumer(newValue -> ModConfig.get().toolDurablityPercentage = newValue)
                 .build());
 
         screenTab.addEntry(entryBuilder.startBooleanToggle(Text.literal("Background for stack count"),ModConfig.get().background)

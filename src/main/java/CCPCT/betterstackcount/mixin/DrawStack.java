@@ -1,6 +1,7 @@
 package CCPCT.betterstackcount.mixin;
 
 import CCPCT.betterstackcount.config.ModConfig;
+import CCPCT.betterstackcount.util.Chat;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -29,12 +30,26 @@ public abstract class DrawStack {
     @Inject(method = "drawStackCount", at = @At("HEAD"), cancellable = true)
     private void onDrawText(TextRenderer textRenderer, ItemStack stack, int x, int y, @Nullable String stackCountText, CallbackInfo ci){
         if (!ModConfig.get().enableMod) return;
-        if (ModConfig.get().fontHeight <= 5 || (stack.getCount() <= 1 && stackCountText == null)) {
+        if (ModConfig.get().fontHeight <= 5 || // font too small
+                !(stack.getCount() == 1 && stack.getMaxDamage()>0 && ModConfig.get().showToolDurability && stack.getDamage()!=0) && // tool/armour
+                (stack.getCount()<=1 && stackCountText == null)) { // no getCount available
             ci.cancel();
             return;
         }
 
-        String string = stackCountText == null ? String.valueOf(stack.getCount()) : stackCountText;
+        String string;
+        if (stack.getCount()==1){
+            int durability = stack.getMaxDamage()-stack.getDamage();
+            if (ModConfig.get().toolDurablityPercentage) string = 100 * durability / stack.getMaxDamage() + "%";
+
+            else {
+                string = switch ((int) Math.floor(Math.log10(durability))) {
+                    case 3,4,5 -> (int)(durability*0.001)+"k";
+                    case 6,7,8 -> (int)(durability*0.000001)+"M";
+                    default -> String.valueOf(durability);
+                };
+            }
+        } else string = stackCountText == null ? String.valueOf(stack.getCount()) : stackCountText;
 
         this.matrices.push();
 

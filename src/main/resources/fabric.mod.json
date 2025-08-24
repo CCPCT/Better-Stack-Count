@@ -3,7 +3,7 @@
   "id": "betterstackcount",
   "version": "${version}",
   "name": "Better Stack Count",
-  "description": "simple mod configure stack count text",
+  "description": "simple mod to configure stack count text",
   "authors": [],
   "contact": {},
   "license": "GPL-3.0",
