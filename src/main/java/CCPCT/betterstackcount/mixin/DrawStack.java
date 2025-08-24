@@ -27,7 +27,11 @@ public abstract class DrawStack {
     public abstract void fill(int x1, int y1, int x2, int y2, int color);
 
 
-    @Inject(method = "drawStackCount", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void onDrawText(TextRenderer textRenderer, ItemStack stack, int x, int y, @Nullable String stackCountText, CallbackInfo ci){
         if (!ModConfig.get().enableMod) return;
         if (ModConfig.get().fontHeight <= 5 || // font too small
