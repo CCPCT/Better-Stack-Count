@@ -2,6 +2,10 @@ Better Stack count
 -
 Simple mod which let you customise the item stack count (inventory&hotbar) ~
 
+Download
+-
+go to package or [Modrinth mod page](https://modrinth.com/mod/better-stack-count)
+
 settings:
 -
 - size
