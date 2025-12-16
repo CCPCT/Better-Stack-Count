@@ -13,15 +13,16 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.joml.Matrix3x2fStack;
 
 @Mixin(DrawContext.class)
 public abstract class DrawStack {
     @Final
     @Shadow
-    private MatrixStack matrices;
+    private Matrix3x2fStack matrices;
 
     @Shadow
-    public abstract int drawText(TextRenderer textRenderer, @Nullable String text, int x, int y, int color, boolean shadow);
+    public abstract void drawText(TextRenderer textRenderer, @Nullable String text, int x, int y, int color, boolean shadow);
 
     @Shadow
     public abstract void fill(int x1, int y1, int x2, int y2, int color);
@@ -51,7 +52,7 @@ public abstract class DrawStack {
             }
         } else string = stackCountText == null ? String.valueOf(stack.getCount()) : stackCountText;
 
-        this.matrices.push();
+        this.matrices.pushMatrix();
 
         if (ModConfig.get().position.contains("Right")){
             x+= 17 - textRenderer.getWidth(string)*ModConfig.get().fontHeight/100;
@@ -60,17 +61,17 @@ public abstract class DrawStack {
             y+= 18 - textRenderer.fontHeight*ModConfig.get().fontHeight/100;
         }
 
-        this.matrices.translate(x, y, 200.0F);
-        this.matrices.scale(ModConfig.get().fontHeight/100f, ModConfig.get().fontHeight/100f, 1.0f);
+        this.matrices.translate(x, y);
+        this.matrices.scale(ModConfig.get().fontHeight/100f, ModConfig.get().fontHeight/100f);
 
         if (ModConfig.get().background){
             this.fill(-1,-1,textRenderer.getWidth(string),textRenderer.fontHeight-1,ModConfig.get().bgColour);
-            this.matrices.translate(0, 0, 1.0F);
+            this.matrices.translate(0, 0);
         }
 
         this.drawText(textRenderer, string, 0, 0, ModConfig.get().colour, !ModConfig.get().background);
 
-        this.matrices.pop();
+        this.matrices.popMatrix();
         ci.cancel();
     }
 }
