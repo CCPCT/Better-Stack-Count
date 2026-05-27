@@ -4,27 +4,27 @@
   "version": "${version}",
   "name": "Better Stack Count",
   "description": "simple mod to configure stack count text",
-  "authors": [],
-  "contact": {},
+  "authors": ["CCPCT"],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/better-stack-count",
+    "sources": "https://github.com/CCPCT/Better-Stack-Count",
+    "issues": "https://github.com/CCPCT/Better-Stack-Count/issues"
+  },
   "license": "GPL-3.0",
   "icon": "assets/betterstackcount/icon.png",
   "environment": "client",
   "entrypoints": {
-    "client": [
-      "CCPCT.betterstackcount.client.Client"
-    ],
-    "modmenu": [
-      "CCPCT.betterstackcount.config.ModMenu"
-    ]
+    "client": ["CCPCT.betterstackcount.client.Client"],
+    "modmenu": ["CCPCT.betterstackcount.config.ModMenu"]
   },
   "mixins": [
     "betterstackcount.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}",
-    "java": ">=21",
+    "fabric-api": "*",
+    "fabricloader": "*",
+    "minecraft": "${minecraft_range}",
+    "java": ">=25",
     "modmenu": "*",
     "cloth-config": "*"
   }
