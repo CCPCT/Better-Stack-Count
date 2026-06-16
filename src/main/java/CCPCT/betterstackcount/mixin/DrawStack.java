@@ -41,7 +41,12 @@ public abstract class DrawStack {
             int maxDamage = itemStack.getMaxDamage();
             int durability = maxDamage-itemStack.getDamageValue();
             if (ModConfig.get().toolDurablityPercentage) {
-                string = 100 * durability / maxDamage + "%";
+                if (maxDamage==0){
+                    // prevent devide by 0
+                    string = "100%";
+                } else {
+                    string = 100 * durability / maxDamage + "%";
+                }
             } else {
                 String dura = switch ((int) Math.floor(Math.log10(durability))) {
                     case 3,4,5 -> (int)(durability*0.001)+"k";

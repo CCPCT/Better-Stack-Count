@@ -23,7 +23,7 @@ public class ConfigScreen extends Screen {
                 .setSavingRunnable(ModConfig::save);
 
         ConfigCategory generalTab = builder.getOrCreateCategory(Component.literal("General"));
-        ConfigCategory screenTab = builder.getOrCreateCategory(Component.literal("Stack Count Component"));
+        ConfigCategory screenTab = builder.getOrCreateCategory(Component.literal("Stack Count Text"));
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
