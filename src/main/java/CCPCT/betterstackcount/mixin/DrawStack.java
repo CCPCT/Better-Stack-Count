@@ -23,21 +23,23 @@ public abstract class DrawStack {
     public abstract void text(Font font, @Nullable String str, int x, int y, int color, boolean dropShadow);
 
     @Shadow
-    public abstract void fill(int x1, int y1, int x2, int y2, int color);
+    public abstract void fill(int x0, int y0, int x1, int y1, int col);
 
 
     @Inject(method = "itemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At("HEAD"), cancellable = true)
     private void onDrawText(final Font font, final ItemStack itemStack, int x, int y, final @Nullable String countText, CallbackInfo ci){
         if (!ModConfig.get().enableMod) return;
-        if (ModConfig.get().fontHeight <= 5 || // font too small
-                !(itemStack.getCount() == 1 && itemStack.getMaxDamage()>0 && ModConfig.get().showToolDurability && itemStack.getDamageValue()!=0) && // tool/armour
-                (itemStack.getCount()<=1 && countText == null)) { // no getCount available
+        if (ModConfig.get().fontHeight <= 5) { // font too small
             ci.cancel();
             return;
+        } else if (itemStack.getCount() == 1 && itemStack.getMaxDamage() > 0) { // something with durability
+            if (!ModConfig.get().showToolDurability || itemStack.getDamageValue()==0) {
+                return;
+            }
         }
 
         String string;
-        if (itemStack.getCount()==1){
+        if (itemStack.getCount()==1 && itemStack.getMaxDamage() > 0){
             int maxDamage = itemStack.getMaxDamage();
             int durability = maxDamage-itemStack.getDamageValue();
             if (ModConfig.get().toolDurablityPercentage) {
@@ -60,7 +62,14 @@ public abstract class DrawStack {
                 };
                 string = dura+"/"+max;
             }
-        } else string = (countText == null ? String.valueOf(itemStack.getCount()) : countText);
+        } else {
+            // not tool
+            if (itemStack.getCount() <= 1 && countText == null) {
+                return;
+            }
+            string = (countText == null ? String.valueOf(itemStack.getCount()) : countText);
+        }
+
 
         this.pose.pushMatrix();
 

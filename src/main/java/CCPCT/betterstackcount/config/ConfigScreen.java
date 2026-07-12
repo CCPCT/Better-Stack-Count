@@ -3,6 +3,7 @@ package CCPCT.betterstackcount.config;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.api.Requirement;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
@@ -54,8 +55,9 @@ public class ConfigScreen extends Screen {
 
         screenTab.addEntry(entryBuilder.startStrField(Component.literal("Font"),ModConfig.get().font)
                 .setDefaultValue("")
-                .setTooltip(Component.literal("Use a font (.ttf) from Componenture pack.\nLeave empty to disable"))
+                .setTooltip(Component.literal("Use a font (.ttf) from Componenture pack.\nLeave empty to disable\nWIP... still under development"))
                 .setSaveConsumer(newValue -> ModConfig.get().font = newValue)
+                .setRequirement(() -> false)
                 .build());
 
         screenTab.addEntry(entryBuilder.startStringDropdownMenu(Component.literal("Position of Stack count"),ModConfig.get().position)
