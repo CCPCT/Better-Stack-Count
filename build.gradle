@@ -25,7 +25,7 @@ if (propsFile.exists()) {
     throw new GradleException("Could not find version config: ${propsFile}")
 }
 
-version = "${project.projectVersion}"
+version = "${minecraft_version}-${project.projectVersion.substring(project.projectVersion.indexOf('-') + 1)}"
 
 processResources {
     inputs.property "version", project.version
